@@ -9,7 +9,7 @@ Thesis Project
   - [DataModel](https://github.com/GiuliaFaletti/NumericalOptimization/blob/main/DataModel.py)
   - [DataModel2](https://github.com/GiuliaFaletti/NumericalOptimization/blob/main/DataModel2.py)
   - [DataModel3](https://github.com/GiuliaFaletti/NumericalOptimization/blob/main/DataModel3.py)
-  -
+  - WORK IN PROGRESS...
   -
   -
   -
