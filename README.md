@@ -16,7 +16,7 @@ Thesis Project
   -
   -
   -
-  -[LoadData](https://github.com/GiuliaFaletti/LuminosityOptimization/blob/main/LoadData.py): Module that defines different functions able to extract data from FillData.xlsx and TurnAroundData.xlsx. It is important to say that the loaded data have been previously cut considering only the turnaround times that can be used for statistical purposes, and the fills defined "physics fills";
+  - [LoadData](https://github.com/GiuliaFaletti/LuminosityOptimization/blob/main/LoadData.py): Module that defines different functions able to extract data from FillData.xlsx and TurnAroundData.xlsx. It is important to say that the loaded data have been previously cut considering only the turnaround times that can be used for statistical purposes, and the fills defined "physics fills";
   - [LuminosityOptimization](https://github.com/GiuliaFaletti/LuminosityOptimization/blob/main/LuminosityOptimization.py): Module that defines different functions that evaluate the optimization model parameters, like the optimized fill times;
   - [TurnArounData](https://github.com/GiuliaFaletti/LuminosityOptimization/blob/main/TurnAroundData.xlsx): Excel file with sorted statistical samples of turn around times (sample16, sample17, sample18).
   - [FillData](https://github.com/GiuliaFaletti/LuminosityOptimization/blob/main/FillData.xlsx): Excel file with turnaround times and fill times for each year (t16, tf16, ta17, tf17, ta18, tf18), fills numbers (NrFill_2016, NrFill_2017, Nr_fill2018) and statistical samples of turn around times (sample16, sample17, sample18);
