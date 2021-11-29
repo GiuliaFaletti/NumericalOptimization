@@ -22,8 +22,7 @@ for i in range(len(FillNumber16)):
     f.close()
 
 L_int_summary_16 = np.array(L_int_summary_16)
-print(FillNumber16)
-print(L_int_summary_16)
+
 
 
 L_int_summary_17=[]
@@ -38,8 +37,7 @@ for i in range(len(FillNumber17)):
     f.close()
 
 L_int_summary_17 = np.array(L_int_summary_17)
-print(FillNumber17)
-print(L_int_summary_17)
+
 
 L_int_summary_18=[]
 for i in range(len(FillNumber18)):   
@@ -53,8 +51,3 @@ for i in range(len(FillNumber18)):
     f.close()
 
 L_int_summary_18 = np.array(L_int_summary_18)
-print(FillNumber18)
-print(L_int_summary_18)
-
-
-print(len(L_int_summary_16), len(L_int_summary_17), len(L_int_summary_18))

@@ -1,14 +1,16 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 import LoadData as ld
-import LuminosityOptimization as lo
 import scipy.integrate as integrate
 from lmfit import Model
-import sympy as sp
-from scipy.optimize import minimize, LinearConstraint
-from scipy.integrate import quad
+
+
+plt.rcParams.update({
+  "text.usetex": True,
+  "font.family": "Helvetica",
+  "font.size": 12
+})
+
 
 #Evaluating the double exponential data model considering the correct data sample
 
@@ -141,9 +143,9 @@ for i in range(len(FillNumber16)):
     
     #defining the plots
     ax1.plot(T_fit, Y, 'r-', label='Double exponential fit')
-    ax1.plot([], [], 'kx ', label='Reduced Chi-Square ={:.5f}'.format(fit_result.redchi))
+    ax1.plot([], [], 'kx ', label=r'$\tilde{\chi}^2$='+'{:.5f}'.format(fit_result.redchi))
     ax1.set_xlabel('Times [s]')
-    ax1.set_ylabel('Luminosity evolution [Hz/\u03BCb]')
+    ax1.set_ylabel('Luminosity evolution [$\mathrm{Hz}/\mathrm{\mu b}$]')
     plt.legend(loc='best')
     
     #evaluating luminosity
@@ -314,9 +316,9 @@ for i in range(len(FillNumber17)):
     
     #defining the plots
     ax1.plot(T_fit, Y, 'r-', label='Double exponential fit')
-    ax1.plot([], [], 'kx ', label='Reduced Chi-Square ={:.5f}'.format(fit_result.redchi))
+    ax1.plot([], [], 'kx ', label=r'$\tilde{\chi}^2$='+'{:.5f}'.format(fit_result.redchi))
     ax1.set_xlabel('Times [s]')
-    ax1.set_ylabel('Luminosity evolution [Hz/\u03BCb]')
+    ax1.set_ylabel('Luminosity evolution [$\mathrm{Hz}/\mathrm{\mu b}$]')
     plt.legend(loc='best')
         
     #evaluating luminosity
@@ -487,9 +489,9 @@ for i in range(len(FillNumber18)):
     
     #defining the plots
     ax1.plot(T_fit, Y, 'r-', label='Double exponential fit')
-    ax1.plot([], [], 'kx ', label='Reduced Chi-Square ={:.5f}'.format(fit_result.redchi))
+    ax1.plot([], [], 'kx ', label=r'$\tilde{\chi}^2$='+'{:.5f}'.format(fit_result.redchi))
     ax1.set_xlabel('Times [s]')
-    ax1.set_ylabel('Luminosity evolution [Hz/\u03BCb]')
+    ax1.set_ylabel('Luminosity evolution [$\mathrm{Hz}/\mathrm{\mu b}$]')
     plt.legend(loc='best')
     
     #evaluating luminosity
@@ -544,7 +546,7 @@ plt.savefig('FitModel3Par/d3_2018.pdf')
 plt.close()
 
   
-
+"""
 #Correlation between parameters and correlation plots 2016
 corr1=np.corrcoef(a_16, b_16)
 corr4=np.corrcoef(a_16, d_16)
@@ -616,6 +618,7 @@ plt.legend(loc="best")
 plt.savefig('FitModel3Par/b17_d17.pdf') 
 plt.close()
 
+
 #Correlation between parameters and correlation plots 2018
 corr1=np.corrcoef(a_18, b_18)
 corr4=np.corrcoef(a_18, d_18)
@@ -650,23 +653,23 @@ ax4.set_xlabel('b_18')
 ax4.plot([],[],"k>", label="Correlation={:.3f}".format(corr5[0,1]))
 plt.savefig('FitModel3Par/b18_d18.pdf') 
 plt.close()
-
+"""
 
 fig1, ax1=plt.subplots()
-ax1.plot(FillNumber16, reduced_chi3_16, "b.", label="3 Parameter red_chi")
+ax1.plot(FillNumber16, reduced_chi3_16, "b.", label=r'3 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2016")
 plt.legend(loc="best")
 plt.savefig('Redchi/3Par_2016_scatter.pdf')
 #plt.show()
 
 fig1, ax1=plt.subplots()
-ax1.plot(FillNumber17, reduced_chi3_17, "b.", label="3 Parameter red_chi")
+ax1.plot(FillNumber17, reduced_chi3_17, "b.", label=r'3 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2017")
 plt.legend(loc="best")
 plt.savefig('Redchi/3Par_2017_scatter.pdf')
 #plt.show()
 fig1, ax1=plt.subplots()
-ax1.plot(FillNumber18, reduced_chi3_18, "b.", label="3 Parameter red_chi")
+ax1.plot(FillNumber18, reduced_chi3_18, "b.", label=r'3 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2018")
 plt.legend(loc="best")
 plt.savefig('Redchi/3Par_2018_scatter.pdf')
@@ -674,7 +677,7 @@ plt.savefig('Redchi/3Par_2018_scatter.pdf')
 
 
 fig1, ax1=plt.subplots()
-ax1.hist(reduced_chi3_16, color="green", alpha=0.3, label="3 Parameter red_chi")
+ax1.hist(reduced_chi3_16, color="green", alpha=0.3, label=r'3 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2016")
 plt.legend(loc="best")
 ax1.set_ylabel('Normalized Frequencies')
@@ -682,7 +685,7 @@ ax1.set_xlabel('Reduced Chi Square')
 plt.savefig('Redchi/3Par_2016_distr.pdf')
 #plt.show()
 fig1, ax1=plt.subplots()
-ax1.hist(reduced_chi3_17, color="steelblue", alpha=0.5, label="3 Parameter red_chi")
+ax1.hist(reduced_chi3_17, color="steelblue", alpha=0.5, label=r'3 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2017")
 plt.legend(loc="best")
 ax1.set_ylabel('Normalized Frequencies')
@@ -690,10 +693,135 @@ ax1.set_xlabel('Reduced Chi Square')
 plt.savefig('Redchi/3Par_2017_distr.pdf')
 #plt.show()
 fig1, ax1=plt.subplots()
-ax1.hist(reduced_chi3_18, color="pink", alpha=0.8,  label="3 Parameter red_chi")
+ax1.hist(reduced_chi3_18, color="pink", alpha=0.8,  label=r'3 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2018")
 plt.legend(loc="best")
 ax1.set_ylabel('Normalized Frequencies')
 ax1.set_xlabel('Reduced Chi Square')
 plt.savefig('Redchi/3Par_2018_distr.pdf')
 #plt.show()
+
+
+with open('Data/a_16_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in a_16:
+    with open('Data/a_16_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/b_16_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in b_16:
+    with open('Data/b_16_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+        
+with open('Data/d_16_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in d_16:
+    with open('Data/d_16_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/a_17_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in a_17:
+    with open('Data/a_17_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/b_17_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in b_17:
+    with open('Data/b_17_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+        
+with open('Data/d_17_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in d_17:
+    with open('Data/d_17_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/a_18_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in a_18:
+    with open('Data/a_18_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/b_18_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in b_18:
+    with open('Data/b_18_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+        
+with open('Data/d_18_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in d_18:
+    with open('Data/d_18_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+        
+with open('Data/ts_16_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in ts_16:
+    with open('Data/ts_16_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/ts_17_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in ts_17:
+    with open('Data/ts_17_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/ts_18_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in ts_18:
+    with open('Data/ts_18_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/L_int_2016_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in L_int_2016:
+    with open('Data/L_int_2016_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+
+with open('Data/L_int_2017_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in L_int_2017:
+    with open('Data/L_int_2017_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+
+with open('Data/L_int_2018_3Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in L_int_2018:
+    with open('Data/L_int_2018_3Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')

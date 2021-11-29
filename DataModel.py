@@ -1,14 +1,15 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 import LoadData as ld
-import LuminosityOptimization as lo
 import scipy.integrate as integrate
 from lmfit import Model
-import sympy as sp
-from scipy.optimize import minimize, LinearConstraint
-from scipy.integrate import quad
+import matplotlib.ticker as mticker
+
+plt.rcParams.update({
+  "text.usetex": True,
+  "font.family": "Helvetica",
+  "font.size": 12
+})
 
 #Evaluating the double exponential data model considering the correct data sample
 
@@ -144,9 +145,9 @@ for i in range(len(FillNumber16)):
     Y=fit(T_fit_real, fit_result.params['a'].value, (fit_result.params['b'].value/(np.amax(T_fit)-np.amin(T_fit))), fit_result.params['c'].value, fit_result.params['d'].value/(np.amax(T_fit)-np.amin(T_fit)))
     #defining the plots
     ax1.plot(T_fit, Y, 'r-', label='Double exponential fit')
-    ax1.plot([], [], 'kx ', label='Reduced Chi-Square ={:.5f}'.format(fit_result.redchi))
+    ax1.plot([], [], 'kx ', label=r'$\tilde{\chi}^2$='+'{:.5f}'.format(fit_result.redchi))
     ax1.set_xlabel('Times [s]')
-    ax1.set_ylabel('Luminosity evolution [Hz/\u03BCb]')
+    ax1.set_ylabel('Luminosity evolution [$\mathrm{Hz}/\mathrm{\mu b}$]')
     plt.legend(loc='best')
     
     #evaluating luminosity
@@ -184,13 +185,13 @@ for i in range(len(FillNumber16)):
 
 #ploting the parameter distributions
 plt.close('all')
-fig3, ax3=plt.subplots()
+fig3, ax3=plt.subplots(figsize=(8, 5))
 ax3.hist(a_16,  color="green", alpha=0.3, density=True)
 ax3.set_title('a - First amplitude 2016')
 ax3.set_ylabel('Normalized Frequencies')
 ax3.set_xlabel('Parameter Values')
 plt.savefig('FitModel/a_2016.pdf') 
-##plt.show()
+plt.show()
 plt.close()
 fig3, ax3=plt.subplots()
 ax3.hist(b_16, color="green", alpha=0.3, density=True)
@@ -198,23 +199,23 @@ ax3.set_title('b - First decay constant 2016')
 ax3.set_ylabel('Normalized Frequencies')
 ax3.set_xlabel('Parameter Values')
 plt.savefig('FitModel/b_2016.pdf') 
-##plt.show()
+plt.show()
 plt.close()
-fig3, ax3=plt.subplots()
+fig3, ax3=plt.subplots(figsize=(8, 5))
 ax3.hist(c_16, color="green", alpha=0.3, density=True)
 ax3.set_title('c - Second amplitude 2016')
 ax3.set_ylabel('Normalized Frequencies')
 ax3.set_xlabel('Parameter Values')
 plt.savefig('FitModel/c_2016.pdf')
-##plt.show()
+plt.show()
 plt.close()
 fig3, ax3=plt.subplots()
 ax3.hist(d_16, color="green", alpha=0.3, density=True)
-ax3.set_title('d - Second amplitude 2016')
+ax3.set_title('d - Second decay constant 2016')
 ax3.set_ylabel('Normalized Frequencies')
 ax3.set_xlabel('Parameter Values')
 plt.savefig('FitModel/d_2016.pdf') 
-##plt.show()
+plt.show()
 plt.close()
 
 
@@ -337,9 +338,9 @@ for i in range(len(FillNumber17)):
     
     #defining the plots
     ax1.plot(T_fit, Y, 'r-', label='Double exponential fit')
-    ax1.plot([], [], 'kx ', label='Reduced Chi-Square ={:.5f}'.format(fit_result.redchi))
+    ax1.plot([], [], 'kx ', label=r'$\tilde{\chi}^2$='+'{:.5f}'.format(fit_result.redchi))
     ax1.set_xlabel('Times [s]')
-    ax1.set_ylabel('Luminosity evolution [Hz/\u03BCb]')
+    ax1.set_ylabel('Luminosity evolution [$\mathrm{Hz}/\mathrm{\mu b}$]')
     plt.legend(loc='best')
         
     #evaluating luminosity
@@ -521,9 +522,9 @@ for i in range(len(FillNumber18)):
     
     #defining the plots
     ax1.plot(T_fit, Y, 'r-', label='Double exponential fit')
-    ax1.plot([], [], 'kx ', label='Reduced Chi-Square ={:.5f}'.format(fit_result.redchi))
+    ax1.plot([], [], 'kx ', label=r'$\tilde{\chi}^2$ ='+'{:.5f}'.format(fit_result.redchi))
     ax1.set_xlabel('Times [s]')
-    ax1.set_ylabel('Luminosity evolution [Hz/\u03BCb]')
+    ax1.set_ylabel('Luminosity evolution [$\mathrm{Hz}/\mathrm{\mu b}$]')
     plt.legend(loc='best')
     
     #evaluating luminosity
@@ -587,7 +588,7 @@ plt.savefig('FitModel/d_2018.pdf')
 plt.close()
 
   
-
+"""
 #Correlation between parameters
 corr1=np.corrcoef(a_16, b_16)
 corr2=np.corrcoef(c_16, d_16)
@@ -667,8 +668,8 @@ print(corr1[0,1], corr2[0,1], corr3[0,1], corr4[0,1], corr5[0,1], corr6[0,1])
 fig4, ax4=plt.subplots()
 ax4.plot(a_17, b_17, "b.")
 ax4.set_title('a17/b17')
-ax4.set_ylabel('b_17')
-ax4.set_xlabel('a_17')
+ax4.set_ylabel('$b_17$')
+ax4.set_xlabel('$a_17$')
 ax4.plot([],[],"k>", label="Correlation={:.3f}".format(corr1[0,1]))
 plt.legend(loc="best")
 plt.savefig('FitModel/a17_b17.pdf') 
@@ -676,8 +677,8 @@ plt.close()
 fig4, ax4=plt.subplots()
 ax4.plot(a_17, d_17, "b.")
 ax4.set_title('a17/d17')
-ax4.set_ylabel('d_17')
-ax4.set_xlabel('a_17')
+ax4.set_ylabel('$d_17$')
+ax4.set_xlabel('$a_17$')
 ax4.plot([],[],"k>", label="Correlation={:.3f}".format(corr4[0,1]))
 plt.legend(loc="best")
 plt.savefig('FitModel/a17_d17.pdf') 
@@ -685,8 +686,8 @@ plt.close()
 fig4, ax4=plt.subplots()
 ax4.plot(b_17, d_17, "b.")
 ax4.set_title('b17/d17')
-ax4.set_ylabel('d_17')
-ax4.set_xlabel('b_17')
+ax4.set_ylabel('$d_17$')
+ax4.set_xlabel('$b_17$')
 ax4.plot([],[],"k>", label="Correlation={:.3f}".format(corr5[0,1]))
 plt.legend(loc="best")
 plt.savefig('FitModel/b17_d17.pdf') 
@@ -694,8 +695,8 @@ plt.close()
 fig4, ax4=plt.subplots()
 ax4.plot(a_17, c_17, "b.")
 ax4.set_title('a17/c17')
-ax4.set_ylabel('c_17')
-ax4.set_xlabel('a_17')
+ax4.set_ylabel('$c_17$')
+ax4.set_xlabel('$a_17$')
 ax4.plot([],[],"k>", label="Correlation={:.3f}".format(corr6[0,1]))
 plt.legend(loc="best")
 plt.savefig('FitModel/a17_c17.pdf') 
@@ -703,8 +704,8 @@ plt.close()
 fig4, ax4=plt.subplots()
 ax4.plot(c_17, d_17, "b.")
 ax4.set_title('c17/d17')
-ax4.set_ylabel('d_17')
-ax4.set_xlabel('c_17')
+ax4.set_ylabel('$d_17$')
+ax4.set_xlabel('$c_17$')
 ax4.plot([],[],"k>", label="Correlation={:.3f}".format(corr3[0,1]))
 plt.legend(loc="best")
 plt.savefig('FitModel/c17_d17.pdf') 
@@ -712,8 +713,8 @@ plt.close()
 fig4, ax4=plt.subplots()
 ax4.plot(b_17, c_17, "b.")
 ax4.set_title('b17/c17')
-ax4.set_ylabel('c_17')
-ax4.set_xlabel('b_17')
+ax4.set_ylabel('$c_17$')
+ax4.set_xlabel('$b_17$')
 ax4.plot([],[],"k>", label="Correlation={:.3f}".format(corr2[0,1]))
 plt.legend(loc="best")
 plt.savefig('FitModel/b17_c17.pdf') 
@@ -782,29 +783,29 @@ ax4.plot([],[],"k>", label="Correlation={:.3f}".format(corr2[0,1]))
 plt.legend(loc="best")
 plt.savefig('FitModel/b18_c18.pdf') 
 plt.close()
-
+"""
 
 fig1, ax1=plt.subplots()
-ax1.plot(FillNumber16, reduced_chi4_16, "b.", label="4 Parameter red_chi")
+ax1.plot(FillNumber16, reduced_chi4_16, "b.", label=r'4 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2016")
 plt.legend(loc="best")
 plt.savefig('Redchi/4Par_2016_scatter.pdf')
 #plt.show()
 fig1, ax1=plt.subplots()
-ax1.plot(FillNumber17, reduced_chi4_17, "b.", label="4 Parameter red_chi")
+ax1.plot(FillNumber17, reduced_chi4_17, "b.", label=r'4 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2017")
 plt.legend(loc="best")
 plt.savefig('Redchi/4Par_2017_scatter.pdf')
 #plt.show()
 fig1, ax1=plt.subplots()
-ax1.plot(FillNumber18, reduced_chi4_18, "b.", label="4 Parameter red_chi")
+ax1.plot(FillNumber18, reduced_chi4_18, "b.", label=r'4 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2018")
 plt.legend(loc="best")
 plt.savefig('Redchi/4Par_2018_scatter.pdf')
 #plt.show()
 
 fig1, ax1=plt.subplots()
-ax1.hist(reduced_chi4_16,  color="green", alpha=0.3, label="4 Parameter red_chi")
+ax1.hist(reduced_chi4_16,  color="green", alpha=0.3, label=r'4 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2016")
 plt.legend(loc="best")
 ax1.set_ylabel('Normalized Frequencies')
@@ -812,7 +813,7 @@ ax1.set_xlabel('Reduced Chi Square')
 plt.savefig('Redchi/4Par_2016_distr.pdf')
 #plt.show()
 fig1, ax1=plt.subplots()
-ax1.hist(reduced_chi4_17, color="steelblue", alpha=0.5,label="4 Parameter red_chi")
+ax1.hist(reduced_chi4_17, color="steelblue", alpha=0.5,label=r'4 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2017")
 plt.legend(loc="best")
 ax1.set_ylabel('Normalized Frequencies')
@@ -820,10 +821,157 @@ ax1.set_xlabel('Reduced Chi Square')
 plt.savefig('Redchi/4Par_2017_distr.pdf')
 #plt.show()
 fig1, ax1=plt.subplots()
-ax1.hist(reduced_chi4_18, color="pink", alpha=0.8, label="4 Parameter red_chi")
+ax1.hist(reduced_chi4_18, color="pink", alpha=0.8, label=r'4 Parameters $\tilde{\chi}^2$')
 ax1.set_title("2018")
 plt.legend(loc="best")
 ax1.set_ylabel('Normalized Frequencies')
 ax1.set_xlabel('Reduced Chi Square')
 plt.savefig('Redchi/4Par_2018_distr.pdf')
 #plt.show()
+
+
+
+with open('Data/a_16_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in a_16:
+    with open('Data/a_16_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/b_16_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in b_16:
+    with open('Data/b_16_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/c_16_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in c_16:
+    with open('Data/c_16_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/d_16_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in d_16:
+    with open('Data/d_16_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/a_17_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in a_17:
+    with open('Data/a_17_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/b_17_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in b_17:
+    with open('Data/b_17_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/c_17_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in c_17:
+    with open('Data/c_17_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/d_17_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in d_17:
+    with open('Data/d_17_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/a_18_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in a_18:
+    with open('Data/a_18_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/b_18_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in b_18:
+    with open('Data/b_18_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/c_18_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in c_18:
+    with open('Data/c_18_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/d_18_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in d_18:
+    with open('Data/d_18_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+        
+with open('Data/ts_16_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in ts_16:
+    with open('Data/ts_16_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/ts_17_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in ts_17:
+    with open('Data/ts_17_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/ts_18_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in ts_18:
+    with open('Data/ts_18_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+        
+with open('Data/L_int_2016_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in L_int_2016:
+    with open('Data/L_int_2016_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+
+with open('Data/L_int_2017_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in L_int_2017:
+    with open('Data/L_int_2017_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
+
+with open('Data/L_int_2018_4Par.txt', 'w') as f:
+        f.write('')
+        f.close()
+for el in L_int_2018:
+    with open('Data/L_int_2018_4Par.txt', 'a') as f:
+        f.write(str(el))
+        f.write('\n')
